@@ -14,14 +14,7 @@ def get_css():
     Returns the CSS styling for the application.
     """
     return """
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-    /* Fix for MutationObserver errors - small delay to ensure DOM is ready */
-    html {
-        visibility: visible;
-        opacity: 1;
-    }
-    
     /* Global styles */
     html, body, [class*="css"] {
         font-family: 'Roboto', sans-serif !important;
@@ -153,90 +146,68 @@ def get_css():
     
     tbody td {
         padding: 0.8rem !important;
+        border-bottom: 1px solid """ + MEDIUM_GRAY + """ !important;
     }
     
-    /* Pagination button styling */
-    .pagination-button {
-        background-color: """ + DARK_GRAY + """;
-        color: """ + LIGHT_COLOR + """;
-        border: none;
-        border-radius: 5px;
-        padding: 0.6rem 1.2rem;
-        font-weight: 500;
-        margin: 0 0.5rem;
-        cursor: pointer;
-        transition: all 0.3s;
-    }
-    
-    .pagination-button:hover {
-        background-color: """ + HIGHLIGHT_COLOR + """;
-        color: """ + BACKGROUND_COLOR + """;
-    }
-    
-    .pagination-button.active {
-        background-color: """ + HIGHLIGHT_COLOR + """;
-        color: """ + BACKGROUND_COLOR + """;
-    }
-    
-    /* Tab styling */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 3px;
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        background-color: """ + DARK_GRAY + """;
-        border-radius: 5px 5px 0 0;
-        border: none;
-        color: """ + LIGHT_COLOR + """;
-        padding: 0.8rem 1.5rem;
-        font-weight: 400;
-    }
-    
-    .stTabs [aria-selected="true"] {
-        background-color: """ + HIGHLIGHT_COLOR + """ !important;
-        color: """ + BACKGROUND_COLOR + """ !important;
-        font-weight: 500;
-    }
-    
-    /* Button styling */
-    .stButton>button {
-        background-color: """ + HIGHLIGHT_COLOR + """;
-        color: """ + BACKGROUND_COLOR + """;
-        border: none;
-        font-weight: 500;
-        border-radius: 5px;
-        padding: 0.6rem 1.2rem;
-        transition: all 0.3s;
-    }
-    
-    .stButton>button:hover {
-        background-color: #00E092;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
-    
-    /* Slider optimizations */
-    .stSlider div[data-baseweb="slider"] {
-        height: 6px;
-    }
-    
-    .stSlider div[role="slider"] {
-        background-color: """ + HIGHLIGHT_COLOR + """;
-    }
-    
-    /* Footer styling */
-    footer {
-        border-top: 1px solid """ + DARK_GRAY + """;
-        padding-top: 1.5rem;
-        margin-top: 3rem;
-        opacity: 0.8;
-    }
-    
-    /* Card styling for split sections */
+    /* Cards/containers */
     .card {
         background-color: """ + DARK_GRAY + """;
         border-radius: 10px;
         padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Buttons */
+    .stButton button {
+        background-color: """ + HIGHLIGHT_COLOR + """ !important;
+        color: """ + BACKGROUND_COLOR + """ !important;
+        font-weight: 500 !important;
+        border: none !important;
+        border-radius: 5px !important;
+        padding: 0.5rem 1rem !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    .stButton button:hover {
+        opacity: 0.9 !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    /* Progress bar */
+    .stProgress > div > div > div {
+        background-color: """ + HIGHLIGHT_COLOR + """ !important;
+    }
+    
+    /* Download button */
+    .stDownloadButton button {
+        background-color: """ + HIGHLIGHT_COLOR + """ !important;
+        color: """ + BACKGROUND_COLOR + """ !important;
+        font-weight: 500 !important;
+        border: none !important;
+        border-radius: 5px !important;
+        padding: 0.5rem 1rem !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    .stDownloadButton button:hover {
+        opacity: 0.9 !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    /* Footer styling */
+    .footer {
+        text-align: center;
+        padding-top: 2rem;
+        opacity: 0.7;
+        font-size: 0.9rem;
+    }
+    
+    /* Custom card layouts */
+    .metric-card {
+        background-color: """ + DARK_GRAY + """;
+        border-radius: 10px;
+        padding: 1.2rem;
         margin-bottom: 1.5rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
@@ -261,4 +232,6 @@ def get_css():
         background-color: """ + HIGHLIGHT_COLOR + """;
     }
     </style>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     """ 

@@ -32,8 +32,9 @@ def main():
 		</script>
 		""", unsafe_allow_html=True)
 		
-		# Apply CSS styling
-		st.markdown(get_css(), unsafe_allow_html=True)
+		# Apply CSS styling - ensure unsafe_allow_html is set to True
+		css = get_css()
+		st.markdown(css, unsafe_allow_html=True)
 		
 		# Render header
 		render_header()
