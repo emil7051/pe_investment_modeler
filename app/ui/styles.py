@@ -124,6 +124,48 @@ def get_css():
         padding-bottom: 1.5rem;
     }
     
+    /* Slider styling */
+    .stSlider [data-baseweb="slider"] div div div {
+        background-color: """ + HIGHLIGHT_COLOR + """ !important;
+    }
+    
+    .stSlider [data-baseweb="slider"] div div div::before {
+        background-color: """ + HIGHLIGHT_COLOR + """;
+    }
+    
+    .stSlider [data-baseweb="thumb"] div {
+        background-color: """ + HIGHLIGHT_COLOR + """ !important;
+    }
+    
+    /* Radio buttons styling */
+    .stRadio [data-baseweb="radio"] div div div {
+        background-color: """ + HIGHLIGHT_COLOR + """ !important;
+        border-color: """ + HIGHLIGHT_COLOR + """ !important;
+    }
+    
+    /* Checkbox styling */
+    .stCheckbox [data-baseweb="checkbox"] div div div {
+        background-color: """ + HIGHLIGHT_COLOR + """ !important;
+        border-color: """ + HIGHLIGHT_COLOR + """ !important;
+    }
+    
+    /* Select box styling */
+    .stSelectbox [data-baseweb="select"] div div div div {
+        color: """ + BACKGROUND_COLOR + """ !important;
+    }
+    
+    .stSelectbox [data-baseweb="select"] div {
+        background-color: """ + DARK_GRAY + """ !important;
+    }
+    
+    .stSelectbox [data-baseweb="select"] div:hover {
+        border-color: """ + HIGHLIGHT_COLOR + """ !important;
+    }
+    
+    .stSelectbox [data-baseweb="select"] div div div div {
+        background-color: """ + HIGHLIGHT_COLOR + """ !important;
+    }
+    
     /* Tables styling */
     table {
         border-collapse: collapse;
