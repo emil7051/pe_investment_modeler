@@ -35,6 +35,39 @@ def get_css():
         letter-spacing: 0.02em;
     }
     
+    /* Tooltip styling */
+    [data-baseweb="tooltip"] {
+        background-color: """ + DARK_GRAY + """ !important;
+        border: 1px solid """ + HIGHLIGHT_COLOR + """ !important;
+        border-radius: 4px !important;
+        padding: 8px 10px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    [data-baseweb="tooltip"] span {
+        color: """ + LIGHT_COLOR + """ !important;
+        font-family: 'Roboto', sans-serif !important;
+        font-size: 0.85rem !important;
+        font-weight: 400 !important;
+        line-height: 1.4 !important;
+    }
+    
+    /* Make tooltips more visible with a slight animation */
+    [data-baseweb="tooltip"] {
+        opacity: 0.95 !important;
+        transition: opacity 0.2s ease, transform 0.2s ease !important;
+    }
+    
+    [data-baseweb="tooltip"]:hover {
+        opacity: 1 !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    /* Add a small highlight indicator to input labels with tooltips */
+    .stSlider label span, .stNumberInput label span, .stSelectbox label span {
+        border-bottom: 1px dotted """ + MEDIUM_GRAY + """ !important;
+    }
+    
     h1 {
         font-size: 2.2rem !important;
         margin-bottom: 1.5rem !important;

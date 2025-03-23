@@ -26,7 +26,8 @@ def render_sidebar():
             min_value=1000,
             value=10000000,
             step=1000000,
-            format="%d"
+            format="%d",
+            help="The starting annual revenue of the company at acquisition."
         )
         
         initial_ebitda_margin = st.slider(
@@ -34,7 +35,8 @@ def render_sidebar():
             min_value=0.0,
             max_value=50.0,
             value=15.0,
-            step=0.5
+            step=0.5,
+            help="The starting EBITDA margin (Earnings Before Interest, Taxes, Depreciation, and Amortisation) as a percentage of revenue."
         )
         
         entry_multiple = st.slider(
@@ -42,7 +44,8 @@ def render_sidebar():
             min_value=1.0,
             max_value=20.0,
             value=8.0,
-            step=0.5
+            step=0.5,
+            help="The EV/EBITDA multiple used to determine the acquisition price. Higher multiples mean higher purchase prices."
         )
         
         # Growth Assumptions
@@ -55,14 +58,16 @@ def render_sidebar():
             min_value=-10.0,
             max_value=50.0,
             value=10.0,
-            step=0.5
+            step=0.5,
+            help="The annual compound growth rate for revenue during the holding period."
         )
         
         holding_period = st.slider(
             "Holding Period (Years)",
             min_value=1,
             max_value=10,
-            value=5
+            value=5,
+            help="The number of years the investment will be held before exiting."
         )
         
         exit_ebitda_margin = st.slider(
@@ -70,7 +75,8 @@ def render_sidebar():
             min_value=0.0,
             max_value=50.0,
             value=20.0,
-            step=0.5
+            step=0.5,
+            help="The projected EBITDA margin at exit, reflecting operational improvements during ownership."
         )
         
         # Exit Assumptions
@@ -83,7 +89,8 @@ def render_sidebar():
             min_value=1.0,
             max_value=20.0,
             value=10.0,
-            step=0.5
+            step=0.5,
+            help="The EV/EBITDA multiple applied at exit. Often higher than entry multiple due to company improvements and growth."
         )
         
         # Advanced options in an expander
@@ -91,7 +98,8 @@ def render_sidebar():
             currency = st.selectbox(
                 "Currency",
                 options=["AUD", "USD", "EUR", "GBP"],
-                index=0
+                index=0,
+                help="The currency to use for all monetary values in the model."
             )
             
             currency_symbol = {
