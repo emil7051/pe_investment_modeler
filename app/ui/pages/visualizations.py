@@ -4,14 +4,13 @@ Contains the Visualisations page content.
 import streamlit as st
 from app.ui.components import render_navigation_buttons
 
-def render_page(investment, params, change_page):
+def render_page(investment, params):
     """
     Renders the Visualisations page.
     
     Args:
         investment: PEInvestment model instance
         params: Dictionary of input parameters
-        change_page: Function to change pages
     """
     st.markdown("""<h2>Investment Visualisations</h2>""", unsafe_allow_html=True)
     
@@ -38,9 +37,6 @@ def render_page(investment, params, change_page):
     # Tab 4: Parameter Impact
     with viz_tab4:
         render_parameter_impact(investment, params)
-    
-    # Navigation buttons
-    render_navigation_buttons(2, change_page)
 
 def render_revenue_progression(investment, currency):
     """Renders the revenue progression chart."""

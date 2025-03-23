@@ -5,14 +5,13 @@ import streamlit as st
 from app.utils.data import create_export_dataframe, export_to_csv, export_to_excel
 from app.ui.components import render_navigation_buttons
 
-def render_page(investment, params, change_page):
+def render_page(investment, params):
     """
     Renders the Export page.
     
     Args:
         investment: PEInvestment model instance
         params: Dictionary of input parameters
-        change_page: Function to change pages
     """
     st.markdown("""<h2>Export Results</h2>""", unsafe_allow_html=True)
     
@@ -47,7 +46,4 @@ def render_page(investment, params, change_page):
             data=excel_data,
             file_name=f"pe_investment_analysis_{params['currency']}.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        )
-    
-    # Back button
-    render_navigation_buttons(3, change_page) 
+        ) 

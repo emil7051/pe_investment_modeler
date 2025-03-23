@@ -4,13 +4,12 @@ Contains the Overview page content.
 import streamlit as st
 from app.ui.components import render_card
 
-def render_page(investment, change_page):
+def render_page(investment):
     """
     Renders the Overview page.
     
     Args:
         investment: PEInvestment model instance
-        change_page: Function to change pages
     """
     st.markdown("""<h2>Investment Overview</h2>""", unsafe_allow_html=True)
     
@@ -29,24 +28,38 @@ def render_page(investment, change_page):
             investment.get_return_metrics()["IRR"]
         )
     
-    # Display entry price and exit price
-    price_col1, price_col2 = st.columns(2)
+    # Investment details
+    st.markdown("""<h3>Investment Details</h3>""", unsafe_allow_html=True)
     
-    with price_col1:
+    # Create two columns for the investment details cards
+    col1, col2 = st.columns(2)
+    
+    with col1:
         render_card(
-            "Entry Investment", 
-            investment.entry_price,
-            f"Initial valuation based on {investment.entry_multiple:.1f}x multiple"
+            "Entry Enterprise Value",
+            investment.get_entry_enterprise_value(),
+            "The initial purchase price of the company.",
+            value_format="currency"
         )
-    
-    with price_col2:
+        
         render_card(
-            "Exit Value", 
-            investment.exit_price,
-            f"After {investment.holding_period} years with {investment.exit_multiple:.1f}x exit multiple"
+            "Initial EBITDA",
+            investment.get_initial_ebitda(),
+            "The starting earnings before interest, taxes, depreciation, and amortization.",
+            value_format="currency"
         )
-    
-    # Next page button
-    if st.button("View Detailed Metrics →"):
-        change_page(1)
-        st.rerun() 
+        
+    with col2:
+        render_card(
+            "Exit Enterprise Value",
+            investment.get_exit_enterprise_value(),
+            "The projected sale price at exit.",
+            value_format="currency"
+        )
+        
+        render_card(
+            "Final EBITDA",
+            investment.get_exit_ebitda(),
+            "The projected EBITDA at the time of exit.",
+            value_format="currency"
+        ) 

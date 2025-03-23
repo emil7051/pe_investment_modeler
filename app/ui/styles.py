@@ -159,7 +159,7 @@ def get_css():
     
     /* Slider styling */
     .stSlider [data-baseweb="slider"] div div div {
-        background-color: """ + HIGHLIGHT_COLOR + """ !important;
+        background-color: """ + MEDIUM_GRAY + """ !important;
     }
     
     .stSlider [data-baseweb="slider"] div div div::before {
@@ -168,6 +168,48 @@ def get_css():
     
     .stSlider [data-baseweb="thumb"] div {
         background-color: """ + HIGHLIGHT_COLOR + """ !important;
+    }
+    
+    /* Tabs styling */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 2px;
+        background-color: """ + BACKGROUND_COLOR + """ !important;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        height: 3rem;
+        background-color: """ + DARK_GRAY + """ !important;
+        border-radius: 4px 4px 0 0;
+        padding: 10px 20px;
+        color: """ + LIGHT_COLOR + """ !important;
+        font-weight: 400;
+        border: none !important;
+        transition: all 0.2s ease;
+    }
+    
+    .stTabs [data-baseweb="tab"]:hover {
+        background-color: """ + MEDIUM_GRAY + """ !important;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background-color: """ + MEDIUM_GRAY + """ !important;
+        position: relative;
+    }
+    
+    .stTabs [aria-selected="true"]:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 3px;
+        background-color: """ + HIGHLIGHT_COLOR + """;
+    }
+    
+    .stTabs [data-testid="stTabPanelContainer"] {
+        background-color: """ + BACKGROUND_COLOR + """ !important;
+        border-radius: 0 0 4px 4px;
+        padding-top: 20px;
     }
     
     /* Radio buttons styling */

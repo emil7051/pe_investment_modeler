@@ -5,13 +5,12 @@ import streamlit as st
 import pandas as pd
 from app.ui.components import render_navigation_buttons
 
-def render_page(investment, change_page):
+def render_page(investment):
     """
     Renders the Detailed Metrics page.
     
     Args:
         investment: PEInvestment model instance
-        change_page: Function to change pages
     """
     st.markdown("""<h2>Detailed Metrics</h2>""", unsafe_allow_html=True)
     
@@ -27,7 +26,4 @@ def render_page(investment, change_page):
         st.markdown("""<h3>Exit Valuation</h3>""", unsafe_allow_html=True)
         exit_metrics = investment.get_exit_metrics()
         exit_df = pd.DataFrame(exit_metrics.items(), columns=["Metric", "Value"])
-        st.table(exit_df)
-    
-    # Navigation buttons
-    render_navigation_buttons(1, change_page) 
+        st.table(exit_df) 

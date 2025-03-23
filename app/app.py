@@ -14,7 +14,7 @@ st.set_page_config(
 # Import components
 from app.models import PEInvestment
 from app.ui.styles import get_css
-from app.ui.components import render_header, render_footer, render_pagination_dots
+from app.ui.components import render_header, render_footer
 from app.ui.sidebar import render_sidebar
 from app.ui.pages import overview, detailed_metrics, visualizations, export
 
@@ -53,31 +53,23 @@ def main():
 			exit_multiple=params['exit_multiple']
 		)
 		
-		# Set up pagination
-		page_names = ["Overview", "Detailed Metrics", "Visualisations", "Export"]
+		# Create tabs for main navigation
+		tab_overview, tab_metrics, tab_viz, tab_export = st.tabs([
+			"Overview", "Detailed Metrics", "Visualisations", "Export"
+		])
 		
-		# Create session state for pagination if it doesn't exist
-		if 'current_page' not in st.session_state:
-			st.session_state.current_page = 0
+		# Render the appropriate content in each tab
+		with tab_overview:
+			overview.render_page(investment)
 		
-		# Function to change page
-		def change_page(page_index):
-			st.session_state.current_page = page_index
+		with tab_metrics:
+			detailed_metrics.render_page(investment)
 		
-		# Render pagination dots
-		render_pagination_dots(st.session_state.current_page)
+		with tab_viz:
+			visualizations.render_page(investment, params)
 		
-		# Render the appropriate page based on current_page
-		current_page = st.session_state.current_page
-		
-		if current_page == 0:
-			overview.render_page(investment, change_page)
-		elif current_page == 1:
-			detailed_metrics.render_page(investment, change_page)
-		elif current_page == 2:
-			visualizations.render_page(investment, params, change_page)
-		elif current_page == 3:
-			export.render_page(investment, params, change_page)
+		with tab_export:
+			export.render_page(investment, params)
 		
 		# Render footer
 		render_footer()
