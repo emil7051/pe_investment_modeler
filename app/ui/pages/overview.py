@@ -49,4 +49,4 @@ def render_page(investment, change_page):
     # Next page button
     if st.button("View Detailed Metrics →"):
         change_page(1)
-        st.experimental_rerun() 
+        st.rerun() 

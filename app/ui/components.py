@@ -108,17 +108,17 @@ def render_navigation_buttons(current_page, change_page_func):
             prev_label = f"← Back to {['Overview', 'Detailed Metrics', 'Visualisations'][current_page-1]}"
             if st.button(prev_label):
                 change_page_func(current_page - 1)
-                st.experimental_rerun()
+                st.rerun()
         with col_btn2:
             next_label = f"Continue to {['Detailed Metrics', 'Visualisations', 'Export'][current_page]}" + " →"
             if st.button(next_label):
                 change_page_func(current_page + 1)
-                st.experimental_rerun()
+                st.rerun()
     elif current_page == 0:
         if st.button("View Detailed Metrics →"):
             change_page_func(1)
-            st.experimental_rerun()
+            st.rerun()
     elif current_page == 3:
         if st.button("← Back to Visualisations"):
             change_page_func(2)
-            st.experimental_rerun() 
+            st.rerun() 
