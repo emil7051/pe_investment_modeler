@@ -6,31 +6,12 @@ import plotly.express as px
 import numpy as np
 from typing import List, Dict, Tuple, Union
 
-# Define Parc brand colors
-PARC_GREEN = '#34C759'  # More pure green, less teal
-PARC_RED = '#FF3B30'  # Adjusted for better contrast
-PARC_BLACK = '#121212'  # Dark gray instead of pure black
-PARC_DARK_GRAY = '#1E1E1E'  # Slightly lighter gray
-PARC_LIGHT_GRAY = '#2A2A2A'  # Medium gray
-PARC_WHITE = '#F0F0F0'  # Off-white for reduced contrast
-
-# Optimize performance by setting default configurations once
-PLOTLY_DEFAULT_CONFIG = {
-    'displayModeBar': False,  # Hide mode bar for cleaner look
-    'responsive': True  # Make plots responsive
-}
-
-# Common styling for plotly charts
-PLOTLY_LAYOUT_DEFAULTS = {
-    'paper_bgcolor': 'rgba(0,0,0,0)',
-    'plot_bgcolor': 'rgba(0,0,0,0)',
-    'font': dict(
-        family="sans-serif",
-        size=12,
-        color=PARC_WHITE
-    ),
-    'margin': dict(l=40, r=40, t=50, b=40)  # Tighter margins
-}
+# Import constants from centralized module
+from app.utils.constants import (
+    PARC_GREEN, PARC_RED, PARC_BLACK, PARC_DARK_GRAY, 
+    PARC_LIGHT_GRAY, PARC_WHITE, PLOTLY_DEFAULT_CONFIG, 
+    PLOTLY_LAYOUT_DEFAULTS, DEFAULT_CHART_HEIGHT
+)
 
 def create_revenue_progression_chart(years, revenues, currency='AUD'):
 	"""
@@ -64,7 +45,7 @@ def create_revenue_progression_chart(years, revenues, currency='AUD'):
 		xaxis_title='Year',
 		yaxis_title=f'Revenue ({currency})',
 		yaxis_tickformat=',.0f',
-		height=450,  # Slightly reduced height for better performance
+		height=DEFAULT_CHART_HEIGHT,
 		hovermode='x unified',
 		**PLOTLY_LAYOUT_DEFAULTS  # Use default layout settings
 	)
@@ -109,8 +90,9 @@ def create_sensitivity_heatmap(data, row_labels, col_labels, title, fmt='.2f', c
 	# Set Matplotlib style to dark theme but with optimized settings
 	plt.style.use('dark_background')
 	
-	# Reduce figure size for faster rendering
-	fig, ax = plt.subplots(figsize=(8, 5))
+	# Reduced figure size for better rendering - approximately match DEFAULT_CHART_HEIGHT with matplotlib's figsize
+	fig_height = DEFAULT_CHART_HEIGHT / 80  # Convert from pixels to inches at 80 DPI
+	fig, ax = plt.subplots(figsize=(fig_height * 1.6, fig_height))
 	fig.patch.set_facecolor(PARC_BLACK)
 	
 	# Create a DataFrame from the sensitivity data
@@ -188,7 +170,7 @@ def create_waterfall_chart(start_value, changes, labels, title='Value Creation B
 	fig.update_layout(
 		title=title,
 		showlegend=False,
-		height=450,  # Reduced height
+		height=DEFAULT_CHART_HEIGHT,
 		yaxis_title=f'Value ({currency})',
 		yaxis_tickformat=',.0f',
 		**PLOTLY_LAYOUT_DEFAULTS  # Use default layout settings
@@ -269,7 +251,7 @@ def create_tornado_chart(base_value, param_changes, param_names, title='Sensitiv
 		title=title,
 		xaxis_title=f'Change in {metric_name}',
 		barmode='relative',
-		height=450,  # Reduced height
+		height=DEFAULT_CHART_HEIGHT,
 		legend=dict(
 			orientation='h', 
 			yanchor='bottom', 

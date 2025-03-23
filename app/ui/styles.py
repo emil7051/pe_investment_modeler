@@ -2,12 +2,14 @@
 Contains CSS styling for the application.
 """
 
-# Define brand colors for consistency
-HIGHLIGHT_COLOR = '#01FDA2'  # PARC green - updated to uppercase for consistency
+# Brand colors - centralized for the entire application
+# These can be imported by other modules
+HIGHLIGHT_COLOR = '#01FDA2'  # PARC green
 BACKGROUND_COLOR = '#121212'  # Dark background
 DARK_GRAY = '#1E1E1E'       # Dark gray for panels
 MEDIUM_GRAY = '#2A2A2A'     # Medium gray for secondary elements
 LIGHT_COLOR = '#F5F5F5'     # Light color for text
+ERROR_COLOR = '#FF3B30'     # Red for errors and negative values
 
 def get_css():
     """
