@@ -3,7 +3,7 @@ Contains CSS styling for the application.
 """
 
 # Define brand colors for consistency
-HIGHLIGHT_COLOR = '#01fda2'  # Highlight color
+HIGHLIGHT_COLOR = '#01FDA2'  # PARC green - updated to uppercase for consistency
 BACKGROUND_COLOR = '#121212'  # Dark background
 DARK_GRAY = '#1E1E1E'       # Dark gray for panels
 MEDIUM_GRAY = '#2A2A2A'     # Medium gray for secondary elements
@@ -204,7 +204,7 @@ def get_css():
     }}
     
     .stButton>button:hover {{
-        background-color: #00e092;
+        background-color: #00E092;
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }}
