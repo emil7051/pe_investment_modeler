@@ -7,12 +7,30 @@ import numpy as np
 from typing import List, Dict, Tuple, Union
 
 # Define Parc brand colors
-PARC_GREEN = '#29B09D'
-PARC_RED = '#EF553B'
-PARC_BLACK = '#000000'
-PARC_DARK_GRAY = '#0F0F0F'
-PARC_LIGHT_GRAY = '#2A2A2A'
-PARC_WHITE = '#FFFFFF'
+PARC_GREEN = '#34C759'  # More pure green, less teal
+PARC_RED = '#FF3B30'  # Adjusted for better contrast
+PARC_BLACK = '#121212'  # Dark gray instead of pure black
+PARC_DARK_GRAY = '#1E1E1E'  # Slightly lighter gray
+PARC_LIGHT_GRAY = '#2A2A2A'  # Medium gray
+PARC_WHITE = '#F0F0F0'  # Off-white for reduced contrast
+
+# Optimize performance by setting default configurations once
+PLOTLY_DEFAULT_CONFIG = {
+    'displayModeBar': False,  # Hide mode bar for cleaner look
+    'responsive': True  # Make plots responsive
+}
+
+# Common styling for plotly charts
+PLOTLY_LAYOUT_DEFAULTS = {
+    'paper_bgcolor': 'rgba(0,0,0,0)',
+    'plot_bgcolor': 'rgba(0,0,0,0)',
+    'font': dict(
+        family="sans-serif",
+        size=12,
+        color=PARC_WHITE
+    ),
+    'margin': dict(l=40, r=40, t=50, b=40)  # Tighter margins
+}
 
 def create_revenue_progression_chart(years, revenues, currency='AUD'):
 	"""
@@ -36,7 +54,7 @@ def create_revenue_progression_chart(years, revenues, currency='AUD'):
 			mode='lines+markers',
 			name='Revenue',
 			line=dict(color=PARC_GREEN, width=3),
-			marker=dict(size=10, color=PARC_GREEN)
+			marker=dict(size=8, color=PARC_GREEN)  # Smaller markers for better performance
 		)
 	)
 	
@@ -46,15 +64,9 @@ def create_revenue_progression_chart(years, revenues, currency='AUD'):
 		xaxis_title='Year',
 		yaxis_title=f'Revenue ({currency})',
 		yaxis_tickformat=',.0f',
-		height=500,
+		height=450,  # Slightly reduced height for better performance
 		hovermode='x unified',
-		paper_bgcolor='rgba(0,0,0,0)',
-		plot_bgcolor='rgba(0,0,0,0)',
-		font=dict(
-			family="sans-serif",
-			size=12,
-			color=PARC_WHITE
-		)
+		**PLOTLY_LAYOUT_DEFAULTS  # Use default layout settings
 	)
 	
 	# Add a grid
@@ -81,7 +93,7 @@ def create_revenue_progression_chart(years, revenues, currency='AUD'):
 
 def create_sensitivity_heatmap(data, row_labels, col_labels, title, fmt='.2f', cmap='viridis'):
 	"""
-	Create a sensitivity analysis heatmap.
+	Create a sensitivity analysis heatmap with optimized performance.
 	
 	Args:
 		data: 2D array of sensitivity values
@@ -94,10 +106,11 @@ def create_sensitivity_heatmap(data, row_labels, col_labels, title, fmt='.2f', c
 	Returns:
 		Matplotlib figure and axis
 	"""
-	# Set Matplotlib style to dark theme
+	# Set Matplotlib style to dark theme but with optimized settings
 	plt.style.use('dark_background')
 	
-	fig, ax = plt.subplots(figsize=(10, 6))
+	# Reduce figure size for faster rendering
+	fig, ax = plt.subplots(figsize=(8, 5))
 	fig.patch.set_facecolor(PARC_BLACK)
 	
 	# Create a DataFrame from the sensitivity data
@@ -106,15 +119,26 @@ def create_sensitivity_heatmap(data, row_labels, col_labels, title, fmt='.2f', c
 	# Create a custom colormap that goes from dark to PARC_GREEN
 	custom_cmap = sns.light_palette(PARC_GREEN, as_cmap=True)
 	
-	# Create the heatmap
-	sns.heatmap(df, annot=True, fmt=fmt, cmap=custom_cmap, ax=ax, linewidths=.5, cbar_kws={'label': title.split(' ')[0]})
-	ax.set_title(title, color=PARC_WHITE, fontsize=14, fontweight='bold')
+	# Create the heatmap with reduced details for better performance
+	sns.heatmap(
+		df, 
+		annot=True, 
+		fmt=fmt, 
+		cmap=custom_cmap, 
+		ax=ax, 
+		linewidths=0.5,  # Thinner lines
+		cbar_kws={'label': title.split(' ')[0]}
+	)
+	ax.set_title(title, color=PARC_WHITE, fontsize=12, fontweight='bold')
 	
 	# Style the axis labels and ticks
-	ax.set_xticklabels(ax.get_xticklabels(), color=PARC_WHITE)
-	ax.set_yticklabels(ax.get_yticklabels(), color=PARC_WHITE)
+	ax.set_xticklabels(ax.get_xticklabels(), color=PARC_WHITE, fontsize=10)
+	ax.set_yticklabels(ax.get_yticklabels(), color=PARC_WHITE, fontsize=10)
 	
 	plt.tight_layout()
+	
+	# Use a lower dpi to reduce file size and improve rendering speed
+	fig.set_dpi(80)
 	
 	return fig
 
@@ -164,16 +188,10 @@ def create_waterfall_chart(start_value, changes, labels, title='Value Creation B
 	fig.update_layout(
 		title=title,
 		showlegend=False,
-		height=500,
-		paper_bgcolor='rgba(0,0,0,0)',
-		plot_bgcolor='rgba(0,0,0,0)',
-		font=dict(
-			family="sans-serif",
-			size=12,
-			color=PARC_WHITE
-		),
+		height=450,  # Reduced height
 		yaxis_title=f'Value ({currency})',
-		yaxis_tickformat=',.0f'
+		yaxis_tickformat=',.0f',
+		**PLOTLY_LAYOUT_DEFAULTS  # Use default layout settings
 	)
 	
 	fig.update_xaxes(
@@ -251,14 +269,7 @@ def create_tornado_chart(base_value, param_changes, param_names, title='Sensitiv
 		title=title,
 		xaxis_title=f'Change in {metric_name}',
 		barmode='relative',
-		height=500,
-		paper_bgcolor='rgba(0,0,0,0)',
-		plot_bgcolor='rgba(0,0,0,0)',
-		font=dict(
-			family="sans-serif",
-			size=12,
-			color=PARC_WHITE
-		),
+		height=450,  # Reduced height
 		legend=dict(
 			orientation='h', 
 			yanchor='bottom', 
@@ -266,7 +277,8 @@ def create_tornado_chart(base_value, param_changes, param_names, title='Sensitiv
 			xanchor='right', 
 			x=1,
 			font=dict(color=PARC_WHITE)
-		)
+		),
+		**PLOTLY_LAYOUT_DEFAULTS  # Use default layout settings
 	)
 	
 	# Add a vertical line at the base value
@@ -274,7 +286,7 @@ def create_tornado_chart(base_value, param_changes, param_names, title='Sensitiv
 		type='line',
 		x0=0, y0=-0.5,
 		x1=0, y1=len(params)-0.5,
-		line=dict(color=PARC_WHITE, width=2, dash='dash')
+		line=dict(color=PARC_WHITE, width=1.5, dash='dash')  # Thinner line
 	)
 	
 	fig.update_xaxes(
