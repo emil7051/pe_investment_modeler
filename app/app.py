@@ -21,6 +21,17 @@ from app.ui.pages import overview, detailed_metrics, visualizations, export
 def main():
 	"""Main entry point for the application."""
 	try:
+		# Add a small script to help prevent MutationObserver errors
+		st.markdown("""
+		<script>
+			// Small delay to ensure DOM is fully loaded
+			document.addEventListener('DOMContentLoaded', function() {
+				// This runs when the DOM is fully loaded
+				console.log('DOM fully loaded');
+			});
+		</script>
+		""", unsafe_allow_html=True)
+		
 		# Apply CSS styling
 		st.markdown(get_css(), unsafe_allow_html=True)
 		

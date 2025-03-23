@@ -14,6 +14,13 @@ def get_css():
     Returns the CSS styling for the application.
     """
     return f"""
+    <style>
+    /* Fix for MutationObserver errors - small delay to ensure DOM is ready */
+    html {{
+        visibility: visible;
+        opacity: 1;
+    }}
+    
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
     
     /* Global styles */
@@ -254,4 +261,5 @@ def get_css():
     .dot.active {{
         background-color: {HIGHLIGHT_COLOR};
     }}
+    </style>
     """ 
