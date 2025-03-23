@@ -389,7 +389,16 @@ Created with ❤️ using Streamlit
 
 # Run the main app
 def main():
-	pass  # All the app code above will be executed when this file is imported
+	try:
+		# For debugging purposes, print a message when the app starts
+		print("App initialization started")
+		
+		# All the app code above will be executed when this file is imported
+		print("App initialized successfully")
+	except Exception as e:
+		# Log any exceptions that occur during initialization
+		print(f"Error during app initialization: {e}")
+		st.error(f"An error occurred during app initialization: {e}")
 
 if __name__ == '__main__':
 	main()
