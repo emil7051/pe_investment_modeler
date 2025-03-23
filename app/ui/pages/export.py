@@ -18,8 +18,8 @@ def render_page(investment, params, change_page):
     
     # Create a data frame for all results
     @st.cache_data  # Cache the export data creation
-    def get_export_data(investment):
-        return create_export_dataframe(investment)
+    def get_export_data(_investment):
+        return create_export_dataframe(_investment)
     
     results_df = get_export_data(investment)
     
