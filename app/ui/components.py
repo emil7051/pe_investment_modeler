@@ -33,7 +33,7 @@ def render_footer():
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid {DARK_GRAY};">
             <div>
                 <p style="color: {LIGHT_COLOR}; opacity: 0.7;">
-                    PE Investment Modeller by <span style="color: {HIGHLIGHT_COLOR};">Parc</span>
+                    PE Investment Modeller by <span style="color: {HIGHLIGHT_COLOR};">Ryan McCourt</span>
                 </p>
             </div>
             <div style="text-align: right;">
