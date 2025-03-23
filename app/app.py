@@ -30,50 +30,173 @@ st.markdown("""
 		padding-top: 2rem;
 		padding-bottom: 2rem;
 	}
-	.stMetric {
-		background-color: #f0f2f6;
-		padding: 15px;
-		border-radius: 5px;
+	
+	/* Parc brand styling */
+	h1, h2, h3 {
+		font-weight: 700 !important;
 	}
+	
+	h1 {
+		margin-bottom: 1.5rem !important;
+	}
+	
+	h2 {
+		border-bottom: 2px solid #29B09D;
+		padding-bottom: 0.5rem;
+		margin-top: 2rem !important;
+	}
+	
+	/* Metrics styling */
+	.stMetric {
+		background-color: #0F0F0F;
+		padding: 1.5rem;
+		border-radius: 8px;
+		border-left: 4px solid #29B09D;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+	
 	.stMetric > div {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 	}
+	
 	.stMetric label {
 		font-size: 1.2rem !important;
 		font-weight: 600 !important;
+		color: #FFFFFF !important;
+		opacity: 0.9;
 	}
+	
 	.stMetric [data-testid="stMetricValue"] {
 		font-size: 2.5rem !important;
 		font-weight: 700 !important;
+		color: #29B09D !important;
 	}
+	
+	/* Header styling */
 	[data-testid="stHeader"] {
-		background-color: rgba(255, 255, 255, 0.8);
+		background-color: rgba(0, 0, 0, 0.8);
 		backdrop-filter: blur(10px);
 	}
+	
+	/* Sidebar styling */
+	[data-testid="stSidebar"] {
+		background-color: #0A0A0A;
+		border-right: 1px solid #29B09D;
+	}
+	
+	.sidebar .sidebar-content {
+		background-color: #0A0A0A;
+	}
+	
+	/* Tables styling */
+	table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+	
+	thead th {
+		background-color: #0F0F0F !important;
+		color: #29B09D !important;
+		font-weight: 600 !important;
+	}
+	
+	tbody tr:nth-child(odd) {
+		background-color: #0A0A0A !important;
+	}
+	
+	tbody tr:nth-child(even) {
+		background-color: #0F0F0F !important;
+	}
+	
+	/* Tab styling */
+	.stTabs [data-baseweb="tab-list"] {
+		gap: 2px;
+	}
+	
+	.stTabs [data-baseweb="tab"] {
+		background-color: #0F0F0F;
+		border-radius: 4px 4px 0 0;
+		border: none;
+		color: white;
+		padding: 10px 16px;
+	}
+	
+	.stTabs [aria-selected="true"] {
+		background-color: #29B09D !important;
+		color: black !important;
+		font-weight: 600;
+	}
+	
+	/* Button styling */
+	.stButton>button {
+		background-color: #29B09D;
+		color: black;
+		border: none;
+		font-weight: 600;
+		border-radius: 4px;
+		padding: 0.5rem 1rem;
+		transition: all 0.3s;
+	}
+	
+	.stButton>button:hover {
+		background-color: #1a8a7a;
+		color: white;
+	}
+	
 	.metric-positive [data-testid="stMetricDelta"] {
 		color: #29B09D !important;
 	}
+	
 	.metric-negative [data-testid="stMetricDelta"] {
 		color: #EF553B !important;
+	}
+	
+	/* Chart improvements */
+	.js-plotly-plot .plotly {
+		background-color: transparent !important;
+	}
+	
+	.js-plotly-plot .bg {
+		fill: transparent !important;
+	}
+	
+	/* Footer styling */
+	footer {
+		border-top: 1px solid #29B09D;
+		padding-top: 1rem;
+		margin-top: 3rem;
+		opacity: 0.8;
 	}
 </style>
 """, unsafe_allow_html=True)
 
-# App title
-st.title("Private Equity Investment Analysis")
+# App title and introduction
 st.markdown("""
-This app helps you model and visualise the performance of private equity investments.
-Adjust the parameters in the sidebar to see how they affect the investment returns.
-""")
+<div style="text-align: left; margin-bottom: 2rem;">
+    <h1 style="color: #FFFFFF; margin-bottom: 0.5rem; font-weight: 700;">
+        Private Equity Investment Analysis
+        <span style="color: #29B09D;">.</span>
+    </h1>
+    <p style="color: #FFFFFF; opacity: 0.8; font-size: 1.1rem; max-width: 800px;">
+        This app helps you model and visualise the performance of private equity investments. 
+        Adjust the parameters in the sidebar to see how they affect the investment returns.
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
 # Create sidebar for inputs
 with st.sidebar:
-	st.header("Investment Parameters")
+	st.markdown("""
+	<h2 style="color: #29B09D; font-weight: 700; margin-bottom: 1.5rem;">Investment Parameters</h2>
+	""", unsafe_allow_html=True)
 	
-	st.subheader("Entry Valuation")
+	st.markdown("""
+	<h3 style="color: #FFFFFF; font-weight: 600; margin-bottom: 1rem; opacity: 0.9;">Entry Valuation</h3>
+	""", unsafe_allow_html=True)
+	
 	initial_revenue = st.number_input(
 		"Initial Revenue (AUD)",
 		min_value=1000,
@@ -98,7 +221,10 @@ with st.sidebar:
 		step=0.5
 	)
 	
-	st.subheader("Growth Assumptions")
+	st.markdown("""
+	<h3 style="color: #FFFFFF; font-weight: 600; margin-top: 1.5rem; margin-bottom: 1rem; opacity: 0.9;">Growth Assumptions</h3>
+	""", unsafe_allow_html=True)
+	
 	revenue_growth = st.slider(
 		"Annual Revenue Growth (%)",
 		min_value=-10.0,
@@ -122,7 +248,10 @@ with st.sidebar:
 		step=0.5
 	)
 	
-	st.subheader("Exit Assumptions")
+	st.markdown("""
+	<h3 style="color: #FFFFFF; font-weight: 600; margin-top: 1.5rem; margin-bottom: 1rem; opacity: 0.9;">Exit Assumptions</h3>
+	""", unsafe_allow_html=True)
+	
 	exit_multiple = st.slider(
 		"Exit Multiple",
 		min_value=1.0,
@@ -162,19 +291,19 @@ investment = PEInvestment(
 col1, col2 = st.columns(2)
 
 with col1:
-	st.header("Entry Valuation")
+	st.markdown("""<h2>Entry Valuation</h2>""", unsafe_allow_html=True)
 	entry_metrics = investment.get_entry_metrics()
 	entry_df = pd.DataFrame(entry_metrics.items(), columns=["Metric", "Value"])
 	st.table(entry_df)
 
 with col2:
-	st.header("Exit Valuation")
+	st.markdown("""<h2>Exit Valuation</h2>""", unsafe_allow_html=True)
 	exit_metrics = investment.get_exit_metrics()
 	exit_df = pd.DataFrame(exit_metrics.items(), columns=["Metric", "Value"])
 	st.table(exit_df)
 
 # Display return metrics with visual emphasis
-st.header("Return Metrics")
+st.markdown("""<h2>Return Metrics</h2>""", unsafe_allow_html=True)
 return_col1, return_col2 = st.columns(2)
 
 with return_col1:
@@ -199,7 +328,7 @@ tab1, tab2, tab3, tab4 = st.tabs([
 
 # Tab 1: Revenue Progression
 with tab1:
-	st.subheader("Revenue Progression Over Time")
+	st.markdown("""<h3>Revenue Progression Over Time</h3>""", unsafe_allow_html=True)
 	
 	years, revenues = investment.get_revenue_progression()
 	fig = create_revenue_progression_chart(years, revenues, currency=currency)
@@ -207,7 +336,7 @@ with tab1:
 
 # Tab 2: Value Bridge
 with tab2:
-	st.subheader("Value Creation Bridge")
+	st.markdown("""<h3>Value Creation Bridge</h3>""", unsafe_allow_html=True)
 	
 	# Calculate the components of value creation
 	revenue_growth_impact = investment.exit_revenue * (investment.initial_ebitda_margin / 100) * investment.entry_multiple - investment.entry_price
@@ -227,7 +356,7 @@ with tab2:
 
 # Tab 3: Sensitivity Analysis
 with tab3:
-	st.subheader("Sensitivity Analysis")
+	st.markdown("""<h3>Sensitivity Analysis</h3>""", unsafe_allow_html=True)
 	
 	# Define deltas for sensitivity analysis
 	growth_deltas = [-4, -2, 0, 2, 4]
@@ -238,7 +367,7 @@ with tab3:
 	
 	# IRR Sensitivity
 	with subtab1:
-		st.subheader("IRR Sensitivity: Revenue Growth vs Exit Multiple")
+		st.markdown("""<h4>IRR Sensitivity: Revenue Growth vs Exit Multiple</h4>""", unsafe_allow_html=True)
 		
 		# Generate sensitivity matrix for IRR
 		irr_data = investment.generate_sensitivity_matrix(
@@ -263,7 +392,7 @@ with tab3:
 	
 	# Money Multiple Sensitivity
 	with subtab2:
-		st.subheader("Money Multiple Sensitivity: Revenue Growth vs Exit Multiple")
+		st.markdown("""<h4>Money Multiple Sensitivity: Revenue Growth vs Exit Multiple</h4>""", unsafe_allow_html=True)
 		
 		# Generate sensitivity matrix for Money Multiple
 		mm_data = investment.generate_sensitivity_matrix(
@@ -288,7 +417,7 @@ with tab3:
 
 # Tab 4: Parameter Impact
 with tab4:
-	st.subheader("Parameter Impact Analysis")
+	st.markdown("""<h3>Parameter Impact Analysis</h3>""", unsafe_allow_html=True)
 	
 	# Define parameter deltas
 	param_deltas = {
@@ -355,15 +484,19 @@ with tab4:
 	st.plotly_chart(fig, use_container_width=True)
 
 # Add export options
-st.header("Export Results")
+st.markdown("""
+<h2 style="border-bottom: 2px solid #29B09D; padding-bottom: 0.5rem; margin-top: 2rem;">
+    Export Results
+</h2>
+""", unsafe_allow_html=True)
 
 # Create a data frame for all results
 results_df = create_export_dataframe(investment)
 
 # Add export buttons
-col1, col2 = st.columns(2)
+export_col1, export_col2 = st.columns(2)
 
-with col1:
+with export_col1:
 	csv = export_to_csv(results_df)
 	st.download_button(
 		label="Download Results as CSV",
@@ -372,7 +505,7 @@ with col1:
 		mime="text/csv",
 	)
 
-with col2:
+with export_col2:
 	excel_data = export_to_excel(results_df)
 	st.download_button(
 		label="Download Results as Excel",
@@ -383,9 +516,21 @@ with col2:
 
 # Add footer
 st.markdown("""
----
-Created with ❤️ using Streamlit
-""")
+<footer>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #29B09D;">
+        <div>
+            <p style="color: #FFFFFF; opacity: 0.7;">
+                PE Investment Modeller by <span style="color: #29B09D;">Parc</span>
+            </p>
+        </div>
+        <div style="text-align: right;">
+            <p style="color: #FFFFFF; opacity: 0.7;">
+                Data is for illustrative purposes only
+            </p>
+        </div>
+    </div>
+</footer>
+""", unsafe_allow_html=True)
 
 # Run the main app
 def main():
